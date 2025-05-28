@@ -41,8 +41,8 @@ const Footer = () => {
           <ul className="space-y-2 text-sm text-gray-700">
             <li><Link to="/" className="hover:underline">Home</Link></li>
             <li><Link to="/history" className="hover:underline">History</Link></li>
-            <li><Link to="/fact-checks" className="hover:underline">Fact Checks</Link></li>
-            <li><Link to="/diversity" className="hover:underline">Know Indian Diversity</Link></li>
+            {/* <li><Link to="/fact-checks" className="hover:underline">Fact Checks</Link></li> */}
+            {/* <li><Link to="/diversity" className="hover:underline">Know Indian Diversity</Link></li> */}
             <li><Link to="/contact" className="hover:underline">Contact Us</Link></li>
           </ul>
         </div>
