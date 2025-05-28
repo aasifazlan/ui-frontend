@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from "../lib/axios";
 const today = new Date().toISOString().split('T')[0];
-const API_URL = `http://localhost:5000/api/articles/today-history/${today}`;
+// const API_URL = `http://localhost:5000/;
 
 export const getTodayHistory = async () => {
   try {
-    const res = await axios.get(API_URL);
+    const res = await api.get(`/articles/today-history/${today}`);
     // console.log("history of the day", res);
     // console.log("history of the day", res.data);
     return res.data;
