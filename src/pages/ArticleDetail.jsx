@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../lib/axios';
 
 function ArticleDetail() {
   const { slug } = useParams();
@@ -9,7 +9,7 @@ function ArticleDetail() {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const res = await axios.get(`/api/articles/slug/${slug}`);
+        const res = await api.get(`/articles/slug/${slug}`);
         setArticle(res.data.article || res.data);
       } catch (err) {
         console.error('Error fetching article:', err);
