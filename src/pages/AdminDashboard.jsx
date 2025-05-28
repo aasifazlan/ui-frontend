@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 
   const fetchArticles = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/articles');
+      const res = await axios.get('https://ui-backend-1eg1.onrender.com/api/articles');
       setArticles(res.data);
     } catch (err) {
       console.error(err);
