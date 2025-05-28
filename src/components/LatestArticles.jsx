@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../lib/axios'
 import { Link } from 'react-router-dom';
 
 const LatestArticles = () => {
@@ -10,7 +10,7 @@ const LatestArticles = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await axios.get('/api/articles');
+        const res = await api.get('/articles');
         const fetchedArticles = Array.isArray(res.data) ? res.data : res.data.articles;
         console.log(fetchedArticles.map(a => a.createdAt));
 
