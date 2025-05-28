@@ -12,7 +12,7 @@ const AncientHistory = () => {
   ];
 
   return (
-    <div className="mt-20 px-4 md:px-8">
+    <div className="mt-32 px-4 md:px-8">
       {/* Timeline header (visible on mobile) */}
       <div className="lg:hidden mb-6">
         <h2 className="text-2xl font-bold mb-4">Timelines</h2>
