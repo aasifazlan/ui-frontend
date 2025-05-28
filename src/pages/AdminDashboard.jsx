@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../lib/axios';
 import TiptapEditor from '../components/TiptapEditor';
 
 const AdminDashboard = () => {
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 
   const fetchArticles = async () => {
     try {
-      const res = await axios.get('https://ui-backend-1eg1.onrender.com/api/articles');
+      const res = await api.get('/articles');
       setArticles(res.data);
     } catch (err) {
       console.error(err);
@@ -67,7 +67,7 @@ const AdminDashboard = () => {
     if (!window.confirm('Are you sure you want to delete this article?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/articles/${id}`, {
+      await api.delete(`/articles/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/articles/${editingId}`, formData, {
+        await api.put(`/articles/${editingId}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
@@ -118,7 +118,7 @@ const AdminDashboard = () => {
         });
         setMessage('✅ Article updated successfully!');
       } else {
-        await axios.post('http://localhost:5000/api/articles', formData, {
+        await api.post('/articles', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
