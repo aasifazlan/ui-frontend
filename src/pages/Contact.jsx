@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from '../lib/axios';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -11,29 +12,25 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async e => {
-    e.preventDefault();
-    setError('');
-    setSubmitted(false);
+  e.preventDefault();
+  setError('');
+  setSubmitted(false);
 
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const res = await api.post('/contact', formData); // Send form data via POST
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        throw new Error(data.message || 'Something went wrong.');
-      }
-    } catch (err) {
-      setError(err.message);
+    // Axios responses already contain the parsed data
+    if (res.status === 200) {
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+    } else {
+      throw new Error(res.data?.message || 'Something went wrong.');
     }
-  };
+  } catch (err) {
+    setError(err.response?.data?.message || err.message);
+  }
+};
+
 
   return (
     <div className="max-w-2xl mt-20 mx-auto px-4 py-20">
