@@ -5,8 +5,10 @@ const CookieConsentBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const consentGiven = localStorage.getItem("cookieConsent");
-    if (!consentGiven) {
+    const localConsent = localStorage.getItem("cookieConsent");
+    const cookieConsent = document.cookie.includes("cookieConsent=true");
+    
+    if (localConsent !== "true" && !cookieConsent) {
       setShowBanner(true);
     }
   }, []);
