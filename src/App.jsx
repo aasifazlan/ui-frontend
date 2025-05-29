@@ -18,6 +18,7 @@ import ModernHistory from "./pages/history/ModernHistory";
 import HistoryArticles from "./pages/history/HistoryArticles";
 import ContactForm from './pages/Contact';
 import History from './pages/History';
+import ScrollToTop from './components/ScrollToTop';
 // Placeholder pages
  
 const Diversity = () => <div className="p-6">🌍 Diversity Page Coming Soon</div>;
@@ -29,6 +30,7 @@ const NotFound = () => <div className="p-6">404: Page Not Found</div>;
 function App() {
   return (
     <Router>
+      <ScrollToTop/>
       <div className="bg-gray-50 min-h-screen font-sans">
         <Navbar />
         <main className="w-full px-4 py-1">

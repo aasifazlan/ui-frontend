@@ -17,9 +17,17 @@ const HistoryOfTheDay = () => {
 
   if (!event) {
     return (
-      <div className="text-center py-10 text-gray-500">
-        Loading today’s history...
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-pulse">
+      <div className="flex flex-col md:flex-row gap-8 items-center bg-white/90 p-6 rounded-xl shadow-lg">
+        <div className="w-full md:w-1/2 h-64 bg-gray-200 rounded-lg"></div>
+        <div className="flex-1 space-y-4">
+          <div className="h-8 bg-gray-300 rounded w-3/4"></div>
+          <div className="h-5 bg-gray-200 rounded w-1/3"></div>
+          <div className="h-20 bg-gray-100 rounded w-full"></div>
+          <div className="h-10 bg-blue-300 rounded w-40"></div>
+        </div>
       </div>
+    </div>
     );
   }
 
