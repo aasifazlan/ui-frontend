@@ -16,6 +16,8 @@ import AncientHistory from "./pages/history/AncientHistory";
 import MedievalHistory from "./pages/history/MedievalHistory";
 import ModernHistory from "./pages/history/ModernHistory";
 import HistoryArticles from "./pages/history/HistoryArticles";
+import ContactForm from './pages/Contact';
+import History from './pages/History';
 // Placeholder pages
  
 const Diversity = () => <div className="p-6">🌍 Diversity Page Coming Soon</div>;
@@ -48,6 +50,8 @@ function App() {
             <Route path="/history/medieval" element={<MedievalHistory />} />
             <Route path="/history/modern" element={<ModernHistory />} />
             <Route path="/history/articles" element={<HistoryArticles />} />
+            <Route path="/history" element={<History/>} />
+            <Route path='/contact' element={<ContactForm/>}/>
           </Routes>
         </main>
         <CookieConsentBanner/>
