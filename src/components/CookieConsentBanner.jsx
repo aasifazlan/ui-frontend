@@ -11,10 +11,18 @@ const CookieConsentBanner = () => {
     }
   }, []);
 
+  const setConsent = (value) => {
+    const expiryDays = 365;
+    const expires = new Date(Date.now() + expiryDays * 864e5).toUTCString();
+
+    document.cookie = `cookieConsent=${value}; expires=${expires}; path=/; SameSite=Lax`;
+  };
+
   const handleAcceptAll = () => {
     localStorage.setItem("cookieConsent", "true");
     localStorage.setItem("analyticsConsent", "true");
     localStorage.setItem("personalizationConsent", "true");
+    setConsent("true");
     setShowBanner(false);
   };
 
@@ -22,6 +30,7 @@ const CookieConsentBanner = () => {
     localStorage.setItem("cookieConsent", "false");
     localStorage.setItem("analyticsConsent", "false");
     localStorage.setItem("personalizationConsent", "false");
+    setConsent("false");
     setShowBanner(false);
   };
 

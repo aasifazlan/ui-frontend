@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import api from "../lib/axios";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -7,20 +8,29 @@ const Footer = () => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
-    // TODO: Replace with your actual newsletter subscription logic, e.g. API call
-    try {
-      // Simulate delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setMessage("Thank you for subscribing!");
-      setEmail("");
-    } catch (err) {
-      setMessage("Subscription failed. Please try again.");
+  e.preventDefault();
+  setLoading(true);
+  setMessage("");
+
+  try {
+    const res = await api.post(
+      "/newsletter",
+      { email },
+      { withCredentials: true }
+    );
+
+    setMessage("🎉 Thank you for subscribing!");
+    setEmail("");
+  } catch (err) {
+    if (err.response && err.response.data && err.response.data.error) {
+      setMessage(`⚠️ ${err.response.data.error}`);
+    } else {
+      setMessage("⚠️ Subscription failed. Please try again.");
     }
-    setLoading(false);
-  };
+  }
+
+  setLoading(false);
+};
 
   return (
     <footer className="bg-[#f9f9f9] border-t border-gray-300 text-[#1a1a1a] font-serif">
@@ -61,27 +71,25 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-3">Stay Connected</h3>
           <p className="text-sm text-gray-600 mb-3">Subscribe to our newsletter for historical facts, cultural insights, and updates.</p>
            {/* Mailchimp Embed Form */}
-           <form
-             action="https://gmail.us11.list-manage.com/subscribe/post?u=2d3adb90b58a30d0ea8ef55fc&amp;id=83988ee032&amp;f_id=009691e0f0"
-             method="post"
-             target="_blank"
-             noValidate
-             className="flex flex-col sm:flex-row gap-2"
-           >
-             <input
-               type="email"
-               name="EMAIL"
-               placeholder="Your email"
-               required
-               className="px-3 py-2 border border-gray-300 rounded-md text-sm w-full sm:w-auto"
-             />
-             <button
-               type="submit"
-               className="px-4 py-2 bg-[#1a1a1a] text-white text-sm rounded-md hover:bg-gray-800"
-             >
-               Subscribe
-             </button>
-           </form>
+           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="email"
+              placeholder="Your email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="px-3 py-2 border border-gray-300 rounded-md text-sm w-full sm:w-auto"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 bg-[#1a1a1a] text-white text-sm rounded-md hover:bg-gray-800"
+            >
+              {loading ? "Subscribing..." : "Subscribe"}
+            </button>
+          </form>
+ 
+
           {message && <p className="mt-2 text-sm text-red-600">{message}</p>}
 
           <div className="mt-5 flex gap-4">
