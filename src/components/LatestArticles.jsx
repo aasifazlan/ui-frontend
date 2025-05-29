@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../lib/axios'
 import { Link } from 'react-router-dom';
+import SkeletonArticle from './SkeletonArticle';
 
 const LatestArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -72,11 +73,12 @@ const LatestArticles = () => {
                 </div>
               </Link>
             ))
-          ) : (
-            !error && (
-              <p className="text-center text-gray-500 col-span-full">No articles found.</p>
-            )
-          )}
+          ) : !error ? (
+            // 👇 Show skeletons while loading
+            Array.from({ length: 6 }).map((_, idx) => <SkeletonArticle key={idx} />)
+            ) : (
+            <p className="text-center text-gray-500 col-span-full">No articles found.</p>
+            )}
         </div>
 
         <div className="text-center mt-6">
