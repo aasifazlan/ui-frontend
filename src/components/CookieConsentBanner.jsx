@@ -15,7 +15,7 @@ const CookieConsentBanner = () => {
     const expiryDays = 365;
     const expires = new Date(Date.now() + expiryDays * 864e5).toUTCString();
 
-    document.cookie = `cookieConsent=${value}; expires=${expires}; path=/; SameSite=Lax`;
+    document.cookie = `cookieConsent=${value}; expires=${expires}; path=/; SameSite=None; Secure`;
   };
 
   const handleAcceptAll = () => {
