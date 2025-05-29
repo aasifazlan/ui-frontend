@@ -62,7 +62,7 @@ const Footer = () => {
           <p className="text-sm text-gray-600 mb-3">Subscribe to our newsletter for historical facts, cultural insights, and updates.</p>
            {/* Mailchimp Embed Form */}
            <form
-             action="https://YOUR-USERNAME.usX.list-manage.com/subscribe/post?u=YOUR_U_ID&amp;id=YOUR_LIST_ID"
+             action="https://gmail.us11.list-manage.com/subscribe/post?u=2d3adb90b58a30d0ea8ef55fc&amp;id=83988ee032&amp;f_id=009691e0f0"
              method="post"
              target="_blank"
              noValidate
